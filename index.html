@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Lista de Tareas</title>
+  <style>
+    ul {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    li {
+      margin-bottom: 5px;
+    }
+
+    button {
+      margin-top: 5px;
+    }
+  </style>
+</head>
+<body>
+  <h2>Lista de Tareas</h2>
+
+  <input type="text" id="newTaskInput" placeholder="Ingrese una nueva tarea">
+  <button onclick="addTask()">Agregar Tarea</button>
+
+  <ul id="taskList">
+    <!-- Las tareas agregadas se mostrarán aquí -->
+  </ul>
+
+  <script>
+    var taskList = document.getElementById("taskList");
+    var newTaskInput = document.getElementById("newTaskInput");
+
+    function addTask() {
+      var task = newTaskInput.value.trim();
+
+      if (task !== "") {
+        var listItem = document.createElement("li");
+        listItem.textContent = task;
+
+        var deleteButton = document.createElement("button");
+        deleteButton.textContent = "Eliminar";
+        deleteButton.onclick = function() {
+          deleteTask(listItem);
+        };
+
+        listItem.appendChild(deleteButton);
+        taskList.appendChild(listItem);
+
+        newTaskInput.value = "";
+      }
+    }
+
+    function deleteTask(listItem) {
+      taskList.removeChild(listItem);
+    }
+  </script>
+</body>
+</html>
